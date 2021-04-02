@@ -2,16 +2,19 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PickSideDishComponent } from './pick-side-dish.component';
 import { Store, StoreModule } from '@ngrx/store';
+import { FormBuilder } from '@angular/forms';
 
 describe('PickSideDishComponent', () => {
   let component: PickSideDishComponent;
   let fixture: ComponentFixture<PickSideDishComponent>;
   let store: Store<any>;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     TestBed.configureTestingModule({
-      imports: [ StoreModule.forRoot({}) ],
-      declarations: [ PickSideDishComponent ]
+      imports: [
+        StoreModule.forRoot({}),
+      ],
+      declarations: [PickSideDishComponent]
     });
 
     await TestBed.compileComponents();
