@@ -30,7 +30,6 @@
     "@ngrx/effects": "^11.1.0",
     "@ngrx/store": "^11.1.0",
     "@ngrx/store-devtools": "^11.1.0",
-    "bootstrap": "^4.5.2",
     "cloudinary-core": "^2.11.2",
     "distance-from": "^1.1.2",
     "firebase": "^7.0 || ^8.0",
