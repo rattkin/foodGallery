@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "foodgallery-d7aa3": {
+      "hosting": {
+        "indicka": [
+          "foodgallery-d7aa3"
+        ]
+      }
+    }
+  }
+}
