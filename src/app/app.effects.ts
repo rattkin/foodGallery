@@ -9,7 +9,7 @@ import { EMPTY, Observable, of } from 'rxjs';
 import { catchError, concatMap, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 // tslint:disable-next-line: max-line-length
 import { addToOrderWithoutSideDish, changeMealFilter, confirmOrder, OrderFailed, OrderSuccess, pickHeat, pickSideDish, removeFromOrder, showOrder } from './actions/order.actions';
-import { googleAnalytics, emailServer } from './config';
+import { googleAnalytics, } from './config';
 import { OrderDialogComponent } from './order-dialog/order-dialog.component';
 import { OrderFailedComponent } from './order-failed/order-failed.component';
 import { OrderSuccessfulComponent } from './order-successful/order-successful.component';
@@ -144,16 +144,16 @@ export class AppEffects {
 
       console.log(message);
 
-      return this.http.post(emailServer, { mailData: message, user: name, location })
-        .pipe(
-          map(res => {
-            if (res === 'OK') {
-              return OrderSuccess();
-            } else {
-              return OrderFailed();
-            }
-          }),
-        );
+      // return this.http.post(emailServer, { mailData: message, user: name, location })
+      //   .pipe(
+      //     map(res => {
+      //       if (res === 'OK') {
+      return of(OrderSuccess());
+      //     } else {
+      //       return OrderFailed();
+      //     }
+      //   }),
+      // );
     }),
     catchError((error) => {
       return of(OrderFailed());

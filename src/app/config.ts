@@ -2,13 +2,13 @@ import * as moment from 'moment';
 
 moment.locale('cs');
 
-export const allowOrder = false;
+export const allowOrder = true;
 
 export const googleAnalytics = 'UA-8333732-11';
-export const emailServer = 'https://indic.cz/mail/mail.php';
+// export const emailServer = 'https://indic.cz/mail/mail.php';
 
-export const AllowedOrderMethods = ['takeout'];
-// export const AllowedOrderMethods = ['takeout', 'restaurant']; // Testing
+// export const AllowedOrderMethods = ['takeout'];
+export const AllowedOrderMethods = ['takeout', 'restaurant']; // Testing
 export const AllowedLocations = ['JH', 'TR'];
 
 export const locationJH = [49.144703, 15.002962];
@@ -20,9 +20,9 @@ export const dayFormat = 'dddd';
 export const timeToPrepareOrder = 15; // minutes
 export const roundingFactor = 5; // minutes
 
-export const startTime = moment('10:30', timeFormat);
-// export const endTime = moment('23:59', timeFormat); // Testing
-export const endTime = moment('20:00', timeFormat);
+export const startTime = moment('00:00', timeFormat);
+export const endTime = moment('23:59', timeFormat); // Testing
+// export const endTime = moment('20:00', timeFormat);
 export const startDay = moment().isoWeekday(1);
 export const endDay = moment().isoWeekday(7);
 
