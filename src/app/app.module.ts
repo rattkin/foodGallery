@@ -31,50 +31,44 @@ import * as fromReducers from './state/reducers/mealStore';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ItemListComponent,
-    PickSideDishComponent,
-    OrderListComponent,
-    OrderDialogComponent,
-    OrderSuccessfulComponent,
-    OrderFailedComponent,
-    SideMenuComponent,
-    PickHeatComponent,
-    HomePageComponent,
-    AreYouSureComponent,
-    LocationPickComponent,
-  ],
-  imports: [
-    MaterialModule,
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatMomentDateModule,
-    StoreModule.forRoot(fromReducers.reducer,
-      //  {      metaReducers    }
-    ),
-    NgxMaterialTimepickerModule.setLocale('cs-CZ'),
-    StoreModule.forFeature(fromReducers.mealFeatureKey, fromReducers.reducer),
-    EffectsModule.forRoot([AppEffects]),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-      logOnly: environment.production, // Restrict extension to log-only mode
-    }),
-    BrowserAnimationsModule,
-    CloudinaryModule.forRoot(Cloudinary,
-      {
-        cloud_name: 'dfm0kilqo'
-      } as CloudinaryConfiguration)
-  ],
-  entryComponents: [
-    PickSideDishComponent,
-  ],
-  providers: [
-    { provide: MatDialogRef, useValue: {} },
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        ItemListComponent,
+        PickSideDishComponent,
+        OrderListComponent,
+        OrderDialogComponent,
+        OrderSuccessfulComponent,
+        OrderFailedComponent,
+        SideMenuComponent,
+        PickHeatComponent,
+        HomePageComponent,
+        AreYouSureComponent,
+        LocationPickComponent,
+    ],
+    imports: [
+        MaterialModule,
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatMomentDateModule,
+        StoreModule.forRoot(fromReducers.reducer),
+        NgxMaterialTimepickerModule.setLocale('cs-CZ'),
+        StoreModule.forFeature(fromReducers.mealFeatureKey, fromReducers.reducer),
+        EffectsModule.forRoot([AppEffects]),
+        StoreDevtoolsModule.instrument({
+            maxAge: 25,
+            logOnly: environment.production, // Restrict extension to log-only mode
+        }),
+        BrowserAnimationsModule,
+        CloudinaryModule.forRoot(Cloudinary, {
+            cloud_name: 'dfm0kilqo'
+        } as CloudinaryConfiguration)
+    ],
+    providers: [
+        { provide: MatDialogRef, useValue: {} },
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
