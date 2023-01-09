@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import url("https://fonts.googleapis.com/css?family=Khand:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic&subset=latin-ext");
 @import "~@angular/material/theming";
 // Plus imports for other components in your app.
@@ -5,29 +6,29 @@
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-@include mat-core();
+@include mat.core();
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$candy-app-accent: mat-palette($mat-light-green);
-$candy-app-primary: mat-palette($mat-amber, A200, A100, A400);
+$candy-app-accent: mat.define-palette(mat.$light-green-palette);
+$candy-app-primary: mat.define-palette(mat.$amber-palette, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
-$candy-app-warn: mat-palette($mat-red);
+$candy-app-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+$candy-app-theme: mat.define-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($candy-app-theme);
+@include mat.all-component-themes($candy-app-theme);
 
-$general-typography: mat-typography-config(
+$general-typography: mat.define-typography-config(
     $font-family: '"Khand", sans-serif',
-    $body-1: mat-typography-level(18px, 28px, 400),
-    $button: mat-typography-level(20px, 28px, 600),
+    $body-1: mat.define-typography-level(18px, 28px, 400),
+    $button: mat.define-typography-level(20px, 28px, 600),
 );
 // Be sure that you only ever include this mixin once!
-@include mat-core($general-typography);
+@include mat.core($general-typography);
