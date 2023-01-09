@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { changeMealFilter, changeOrderMethod } from '../actions/order.actions';
@@ -32,7 +32,7 @@ export class HomePageComponent implements OnInit {
   public isBeforeOpen = isBeforeOpen(moment());
   public isClosedDay = isClosedDay(moment());
   public isAfterClose = isAfterClose(moment());
-  public orderForm: FormGroup = this.formBuilder.group({
+  public orderForm: UntypedFormGroup = this.formBuilder.group({
     orderMethod: ['']
   });
   public allowOrder = allowOrder;
@@ -43,7 +43,7 @@ export class HomePageComponent implements OnInit {
 
   constructor(
     private store: Store<any>,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
   ) { }
   ngOnInit(): void {
     this.selectOrderMethod.subscribe(method =>

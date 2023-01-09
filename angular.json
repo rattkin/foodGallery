@@ -134,9 +134,10 @@
       }
     }
   },
-  "defaultProject": "indicka",
   "cli": {
-    "defaultCollection": "@ngrx/schematics",
-    "analytics": "c2edd051-ab83-4883-92a6-b84714683701"
+    "analytics": "c2edd051-ab83-4883-92a6-b84714683701",
+    "schematicCollections": [
+      "@ngrx/schematics"
+    ]
   }
 }

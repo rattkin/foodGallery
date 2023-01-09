@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { addToOrderWithSideDish } from '../actions/order.actions';
@@ -19,12 +19,12 @@ export class PickSideDishComponent implements OnInit {
   public showPackaging = this.store.pipe(select(selectShowPackaging));
   public chosenSideDish: Meal;
   public dish: Meal;
-  public sideForm: FormGroup;
+  public sideForm: UntypedFormGroup;
 
 
   constructor(
     private store: Store<any>,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     public DialogRef: MatDialogRef<PickSideDishComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any
   ) {

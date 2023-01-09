@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { selectLocation } from '../state/selectors';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder } from '@angular/forms';
 import { AllowedLocations } from '../config';
 import { changeLocation } from '../actions/order.actions';
 
@@ -13,7 +13,7 @@ import { changeLocation } from '../actions/order.actions';
 export class LocationPickComponent implements OnInit {
   public selectLocation = this.store.pipe(select(selectLocation));
 
-  public locationForm: FormGroup = this.formBuilder.group({
+  public locationForm: UntypedFormGroup = this.formBuilder.group({
     location: ['']
   });
   public AllowedLocations = AllowedLocations;
@@ -21,7 +21,7 @@ export class LocationPickComponent implements OnInit {
 
   constructor(
     private store: Store,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
   ) { }
 
   ngOnInit(): void {

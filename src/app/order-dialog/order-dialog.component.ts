@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import * as moment from 'moment';
@@ -20,7 +20,7 @@ declare let gtag: Function;
 export class OrderDialogComponent implements OnInit {
   @ViewChild('picker') picker: NgxMaterialTimepickerComponent;
   public AllowedOrderMethods = AllowedOrderMethods;
-  public orderForm: FormGroup;
+  public orderForm: UntypedFormGroup;
   public order = this.store.pipe(select(selectOrder));
   public total = this.store.pipe(select(selectOrderTotal));
   public progress = this.store.pipe(select(selectProgress));
@@ -33,7 +33,7 @@ export class OrderDialogComponent implements OnInit {
   constructor(
     private store: Store<any>,
     public DialogRef: MatDialogRef<PickSideDishComponent>,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
   ) { }
 
   ngOnInit(): void {
