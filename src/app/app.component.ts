@@ -1,40 +1,56 @@
-import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { Component, HostListener, OnInit } from '@angular/core';
+import {
+  BreakpointObserver,
+  Breakpoints,
+  BreakpointState,
+} from '@angular/cdk/layout';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
-import { sideNavToggle, updateMediaQuery, changeLocation } from './actions/order.actions';
+import {
+  sideNavToggle,
+  updateMediaQuery,
+  changeLocation,
+} from './actions/order.actions';
 import { endDay, startDay, locationJH, locationTR } from './config';
-import { selectMobileQuery, selectOrder, selectSideNavOpened } from './state/selectors';
-import { isAfterClose, isBeforeOpen, isClosedDay, isMenu, isOpen, isUntilMenuEnd } from './utils/date';
+import {
+  selectMobileQuery,
+  selectOrder,
+  selectSideNavOpened,
+} from './state/selectors';
+import {
+  isAfterClose,
+  isBeforeOpen,
+  isClosedDay,
+  isMenu,
+  isOpen,
+  isUntilMenuEnd,
+} from './utils/date';
 const distFrom = require('distance-from');
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-
-  public sideNavOpened = this.store.pipe(select(selectSideNavOpened));
-  public mobileQuery = this.store.pipe(select(selectMobileQuery));
-  public order = this.store.pipe(select(selectOrder));
+  #store = inject(Store<any>);
+  #breakpointObserver = inject(BreakpointObserver);
+  public sideNavOpened = this.#store.pipe(select(selectSideNavOpened));
+  public mobileQuery = this.#store.pipe(select(selectMobileQuery));
+  public order = this.#store.pipe(select(selectOrder));
   private isOrder = false;
-  public isMobile: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.XSmall);
+  public isMobile: Observable<BreakpointState> =
+    this.#breakpointObserver.observe(Breakpoints.XSmall);
 
-  constructor(
-    private store: Store<any>,
-    private breakpointObserver: BreakpointObserver,
-  ) {
-  }
+  constructor(private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit(): void {
-
-    this.isMobile.subscribe(result => {
-      this.store.dispatch(updateMediaQuery({ mediaQuery: result.matches }));
+    this.isMobile.subscribe((result) => {
+      this.#store.dispatch(updateMediaQuery({ mediaQuery: result.matches }));
     });
 
-    this.order.subscribe(result => {
+    this.order.subscribe((result) => {
       if (result.length) {
         this.isOrder = true;
       } else {
@@ -42,8 +58,11 @@ export class AppComponent implements OnInit {
       }
     });
 
-    navigator.geolocation.getCurrentPosition(position => {
-      const currentPosition = [position.coords.latitude, position.coords.longitude];
+    navigator.geolocation.getCurrentPosition((position) => {
+      const currentPosition = [
+        position.coords.latitude,
+        position.coords.longitude,
+      ];
       const distanceToJH = distFrom(locationJH).to(currentPosition).in('km');
       const distanceToTR = distFrom(locationTR).to(currentPosition).in('km');
 
@@ -52,13 +71,12 @@ export class AppComponent implements OnInit {
 
       if (distanceToJH < distanceToTR) {
         console.log('change location to JH');
-        this.store.dispatch(changeLocation({ location: 'JH' }));
+        this.#store.dispatch(changeLocation({ location: 'JH' }));
       } else {
         console.log('change location to TR');
-        this.store.dispatch(changeLocation({ location: 'TR' }));
+        this.#store.dispatch(changeLocation({ location: 'TR' }));
       }
     });
-
 
     // debug
     console.log('now', moment().format('LLLL'));
@@ -73,7 +91,7 @@ export class AppComponent implements OnInit {
   }
 
   sideNavToggle() {
-    this.store.dispatch(sideNavToggle());
+    this.#store.dispatch(sideNavToggle());
   }
 
   @HostListener('window:beforeunload', ['$event'])

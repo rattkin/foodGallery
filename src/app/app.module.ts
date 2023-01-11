@@ -64,7 +64,8 @@ import * as fromReducers from './state/reducers/mealStore';
         BrowserAnimationsModule,
         CloudinaryModule.forRoot(Cloudinary, {
             cloud_name: 'dfm0kilqo'
-        } as CloudinaryConfiguration)
+        } as CloudinaryConfiguration),
+        StoreModule.forRoot({}, {})
     ],
     providers: [
         { provide: MatDialogRef, useValue: {} },
