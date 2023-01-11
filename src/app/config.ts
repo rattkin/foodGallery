@@ -5,14 +5,15 @@ moment.locale('cs');
 export const allowOrder = true;
 
 export const googleAnalytics = 'UA-8333732-11';
-// export const emailServer = 'https://indic.cz/mail/mail.php';
+// export const emailServer = 'https://indic.cz/mail/mail.php'
+// TODO was deleted
 
 // export const AllowedOrderMethods = ['takeout'];
 export const AllowedOrderMethods = ['takeout', 'restaurant']; // Testing
 export const AllowedLocations = ['JH', 'TR'];
 
 export const locationJH = [49.144703, 15.002962];
-export const locationTR = [49.002780, 14.770935];
+export const locationTR = [49.00278, 14.770935];
 
 export const timeFormat = 'H:mm';
 export const dayFormat = 'dddd';
