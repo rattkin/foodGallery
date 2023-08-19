@@ -21,8 +21,8 @@ export const dayFormat = 'dddd';
 export const timeToPrepareOrder = 15; // minutes
 export const roundingFactor = 5; // minutes
 
-export const startTime = moment('00:00', timeFormat);
-export const endTime = moment('23:59', timeFormat); // Testing
+export const startTime = moment('11:00', timeFormat);
+export const endTime = moment('21:00', timeFormat); // Testing
 // export const endTime = moment('20:00', timeFormat);
 export const startDay = moment().isoWeekday(1);
 export const endDay = moment().isoWeekday(7);
