@@ -1,56 +1,75 @@
 <div class="page">
-    <img src="assets/logo curry house-stroke.svg" class="logo">
-    <div class=" center">
-        <h1>
-            Food gallery demo
-        </h1>
+  <img src="assets/logo curry house-stroke.svg" class="logo" />
+  <div class="center">
+    <h1>Pravá indická restaurace</h1>
+    <h2>
+      Jindřichův Hradec<br />
+      <a href="https://goo.gl/maps/AxwVtizeE7XqFp6R9" target="_blank"
+        >Panská 95</a
+      ><br />
+      Tel.: 775 323 914<br />
+      Pondělí - sobota: 10:30 - 22:00<br />
+      Neděle: 11:00 - 20:00
+    </h2>
+    <h2>
+      Třeboň<br />
+      <a href="https://goo.gl/maps/wQMz526dg4tyLHKi9" target="_blank"
+        >Krčínova 51</a
+      ><br />
+      Tel.: 774 933 899<br />
+      Pondělí - čtvrtek: 11:00 - 21:00<br />
+      Pátek a sobota: 11:00 - 22:00<br />
+      Neděle: 11:00 - 20:00
+    </h2>
 
-        <p>
-            <span [ngClass]="{'bold' : isOpen}">
-                Otevřeno:
-            </span>
-            {{startDay}} až {{endDay}} {{openingTime}} - {{closingTime}}
-            <br>
+    <p>
+      <span [ngClass]="{ bold: isMenu }"> Polední menu: </span>
+      (mimo svátky) {{ startMenuDay }} - {{ endMenuDay }},
+      {{ openingMenuTime }} - {{ closingMenuTime }}
+    </p>
 
-            <span [ngClass]="{'bold' : isMenu}">
-                Polední menu:
-            </span>
-            (mimo svátky) {{startMenuDay}} - {{endMenuDay}}, {{openingMenuTime}} - {{closingMenuTime}}
-        </p>
+    <h1 *ngIf="!allowOrder">
+      <p>
+        Objednávky on-line jsme museli teď v sezoně zastavit.<br />
+        Byl takový zájem, že doba čekání byla moc dlouhá.<br />
+        Můžete si prohlédnout nabídku a objednejte si prosím po telefonu.
+      </p>
+    </h1>
 
-        <h1 *ngIf="!allowOrder">
-            <p>Objednávky on-line jsme museli teď v sezoně zastavit.<br>
-                Byl takový zájem, že doba čekání byla moc dlouhá.<br>
-                Můžete si prohlédnout nabídku a objednejte si prosím po telefonu.</p>
-        </h1>
+    <span class="storeInfo" *ngIf="isBeforeOpen">
+      <p>Zatím není otevřeno ale můžete si objednat</p>
+    </span>
 
-        <span class="storeInfo" *ngIf="isBeforeOpen">
-            <p>Zatím není otevřeno ale můžete si objednat</p>
-        </span>
+    <span class="storeInfo" *ngIf="isClosedDay">
+      <p>Dnes je zavřeno, ale můžete si prohlédnout nabídku</p>
+    </span>
 
-        <span class="storeInfo" *ngIf="isClosedDay">
-            <p>Dnes je zavřeno, ale můžete si prohlédnout nabídku</p>
-        </span>
+    <span class="storeInfo" *ngIf="isAfterClose">
+      <p>Dnes už je zavřeno, ale můžete si prohlédnout nabídku</p>
+    </span>
 
-        <span class="storeInfo" *ngIf="isAfterClose">
-            <p>Dnes už je zavřeno, ale můžete si prohlédnout nabídku</p>
-        </span>
+    <form
+      [formGroup]="orderForm"
+      *ngIf="
+        (!isClosedDay || !isAfterClose) &&
+        AllowedOrderMethods.length > 1 &&
+        allowOrder
+      "
+    >
+      Chcete si objednat:
+      <mat-radio-group formControlName="orderMethod" (change)="methodChange()">
+        <mat-radio-button value="takeout">s sebou</mat-radio-button>
+        <mat-radio-button value="restaurant">ke stolu</mat-radio-button>
+      </mat-radio-group>
+    </form>
 
-        <form [formGroup]="orderForm"
-            *ngIf="(! isClosedDay || !isAfterClose) && AllowedOrderMethods.length >1 && allowOrder">
-            Chcete si objednat:
-            <mat-radio-group formControlName="orderMethod" (change)="methodChange()">
-                <mat-radio-button value="takeout">s sebou</mat-radio-button>
-                <mat-radio-button value="restaurant">ke stolu</mat-radio-button>
-            </mat-radio-group>
-        </form>
+    <app-location-pick *ngIf="allowOrder"></app-location-pick>
 
-        <app-location-pick *ngIf="allowOrder"></app-location-pick>
-
-        <p>
-            <small>
-                Problémy a připomínky: <a href="mailto:muller.jan@gmail.com">muller.jan@gmail.com</a>
-            </small>
-        </p>
-    </div>
+    <p>
+      <small>
+        Problémy a připomínky:
+        <a href="mailto:muller.jan@gmail.com">muller.jan@gmail.com</a>
+      </small>
+    </p>
+  </div>
 </div>
